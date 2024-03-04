@@ -84,20 +84,25 @@ const AiImage = () => {
             type="file"
             onChange={(e) => handleImageChange(e)}
           />
-          <button 
-          className="py-2 w-[10rem] mt-4 mx-auto bg-blue-700/90 text-white rounded-md hover:bg-blue-800/90 hover:scale-110 active:scale-105 transition-all"
-          onClick={() => handleClick()}>Ask Me</button>
+          <button
+            className="shadow-md py-2 w-[10rem] mt-4 mx-auto bg-blue-700/90 text-white rounded-md hover:bg-blue-800/90 hover:scale-110 active:scale-105 transition-all"
+            onClick={() => handleClick()}
+          >
+            Ask Me
+          </button>
         </div>
-        <img
-        className="p-4" 
-        src={image}  />
+        <img className="p-4" src={image} />
 
         {loading == true && aiResponse == "" ? (
           <p className=" flex justify-center text-xl text-gray-800 drop-shadow-sm ">
-            <CgSpinner className="animate-spin text-2xl mr-1 mt-[0.2rem]"/> Loading ...</p>
+            <CgSpinner className="animate-spin text-2xl mr-1 mt-[0.2rem]" />{" "}
+            Loading ...
+          </p>
         ) : (
-          <div >
-            <p className="text-xl text-gray-800 drop-shadow-sm mb-6 mt-[0.45rem]">{aiResponse}</p>
+          <div>
+            <p className="text-xl text-gray-800 drop-shadow-sm mb-6 mt-[0.45rem]">
+              {aiResponse}
+            </p>
           </div>
         )}
       </div>
