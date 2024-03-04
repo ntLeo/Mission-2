@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { HiBars3 } from "react-icons/hi2";
+import { motion } from "framer-motion";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -8,7 +9,12 @@ function classNames(...classes: string[]) {
 
 const Header = () => {
   return (
-    <header>
+    <motion.header
+    // FRAMER MOTION ANIMATION
+    initial={{ y: -100,  opacity: 0 }}
+    transition={{ delay: 0.2 }}
+    animate={{ y: 0,  opacity: 1 }}
+    >
       <div className="flex text-center justify-between w-full px-2 bg-slate-100/80  shadow-md ">
         <h1 className="pt-[0.2rem] ml-5 font-semibold text-gray-800 text-2xl">TurnersCars</h1>
         <div className="flex">
@@ -102,7 +108,7 @@ const Header = () => {
           </Menu>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 export default Header;
