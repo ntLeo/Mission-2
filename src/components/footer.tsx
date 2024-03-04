@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#6f8fe5]  h-1/5">
+    <footer className="bg-[#6f8fe5]  h-[16.55rem]">
       <motion.div
       initial={{ y: 100,  opacity: 0 }}
       transition={{ delay: 0.2 }}
@@ -17,7 +17,7 @@ const Footer = () => {
         locations!
       </div>
       <div className="font-sans text-xl flex align-items justify-center ">
-        <button className=" flex align-items justify-center shadow-lg py-1 w-[10rem] mt-4 mx-auto bg-blue-700 text-white rounded-md hover:scale-110 active:scale-105 transition-all">
+        <button className=" flex align-items justify-center shadow-lg py-1 w-[10rem] mt-4 mx-auto bg-blue-700/70 hover:bg-blue-900/70 text-white rounded-md hover:scale-110 active:scale-105 transition-all">
           <div className="py-1 pr-2 ">
             <FaMagnifyingGlassLocation />
           </div>{" "}
