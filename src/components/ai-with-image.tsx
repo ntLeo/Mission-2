@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getBase64 } from "../utils/image-helper";
+import { CgSpinner } from "react-icons/cg";
 
 const AiImage = () => {
-  
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
 
   const [image, setImage] = useState<string>("");
@@ -72,26 +72,32 @@ const AiImage = () => {
   }
 
   return (
-    <section>
-      <div>
-        <div>
-          <div style={{ display: "flex" }}>
-            <input type="file" onChange={(e) => handleImageChange(e)} />
-            <button
-              style={{ marginLeft: "20px" }}
-              onClick={() => handleClick()}
-            >
-              Ask Me
-            </button>
-          </div>
-          <img src={image} style={{ width: "30%", marginTop: 30 }} />
+    <section className="w-full mt-2 flex justify-center text-center h-1/2">
+      <div className="flex flex-col text-center justify-around w-[40rem]">
+        <h1 className="text-xl text-gray-800 drop-shadow-sm ">
+          Upload an image of the car, and our AI will do the rest.
+        </h1>
+
+        <div className=" flex flex-col w-[15rem] mx-auto">
+          <input
+            className="p-2 mt-4 border-2 border-gray-400 rounded-md  "
+            type="file"
+            onChange={(e) => handleImageChange(e)}
+          />
+          <button 
+          className="py-2 w-[10rem] mt-4 mx-auto bg-blue-700 text-white rounded-md hover:bg-blue-800 hover:scale-110 active:scale-105 transition-all"
+          onClick={() => handleClick()}>Ask Me</button>
         </div>
+        <img
+        className="p-4" 
+        src={image}  />
 
         {loading == true && aiResponse == "" ? (
-          <p style={{ margin: "30px 0" }}>Loading ...</p>
+          <p className=" flex justify-center text-xl text-gray-800 drop-shadow-sm ">
+            <CgSpinner className="animate-spin text-2xl mr-1 mt-[0.2rem]"/> Loading ...</p>
         ) : (
-          <div style={{ margin: "30px 0" }}>
-            <p>{aiResponse}</p>
+          <div >
+            <p className="text-xl text-gray-800 drop-shadow-sm mb-6 mt-[0.45rem]">{aiResponse}</p>
           </div>
         )}
       </div>
