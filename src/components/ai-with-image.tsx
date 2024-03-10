@@ -4,6 +4,7 @@ import { getBase64 } from "../utils/image-helper";
 import { CgSpinner } from "react-icons/cg";
 
 const AiImage = () => {
+  // Access the API key
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
 
   const [image, setImage] = useState<string>("");
@@ -14,12 +15,13 @@ const AiImage = () => {
 
   async function aiRun() {
     setLoading(true);
-    setAiResponse("");
+    setAiResponse(""); //clears any previous AI response
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
     const result = await model.generateContent([
       "What is in this image?",
       imageInlineData,
     ]);
+    // generates content using AI model - two inputs to model, question "what is in this image?" and image data to analyze
     const response = await result.response;
     const text = response.text();
     setAiResponse(text);
@@ -30,8 +32,11 @@ const AiImage = () => {
     aiRun();
   };
 
+  // -------------------    Rendering image and file name in DOM      --------------//
+  // -------------------------------------------------------------------------------//
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    //event when user selects new image file
 
     // getting base64 from file to render in DOM
     getBase64(file as File)
@@ -56,6 +61,7 @@ const AiImage = () => {
       reader.onloadend = () => {
         if (reader.result) {
           resolve((reader.result as string).split(",")[1]);
+          // taking base64 data result as string
         } else {
           throw new Error("No result from FileReader");
         }
