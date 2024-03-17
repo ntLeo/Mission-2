@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#6f8fe5]  h-[16.55rem]">
+    <footer className="bg-[#6f8fe5]  h-[14.75rem]">
       <motion.div
       initial={{ y: 100,  opacity: 0 }}
       transition={{ delay: 0.2 }}

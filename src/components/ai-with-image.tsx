@@ -85,11 +85,11 @@ const AiImage = () => {
             onChange={(e) => handleImageChange(e)}
           />
           <button 
-          className="py-2 w-[10rem] mt-4 mx-auto bg-blue-700/90 text-white rounded-md hover:bg-blue-800/90 hover:scale-110 active:scale-105 transition-all"
+          className="py-2 w-[10rem] mt-4 mx-auto bg-blue-700/90 shadow-md text-white rounded-md hover:bg-blue-800/90 hover:scale-110 active:scale-105 transition-all"
           onClick={() => handleClick()}>Ask Me</button>
         </div>
         <img
-        className="p-4" 
+        className="p-4 w-10/12 mx-auto" 
         src={image}  />
 
         {loading == true && aiResponse == "" ? (
