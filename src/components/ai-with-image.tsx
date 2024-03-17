@@ -4,6 +4,7 @@ import { getBase64 } from "../utils/image-helper";
 import { CgSpinner } from "react-icons/cg";
 
 const AiImage = () => {
+  // Access the API key
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
 
   const [image, setImage] = useState<string>("");
@@ -14,12 +15,13 @@ const AiImage = () => {
 
   async function aiRun() {
     setLoading(true);
-    setAiResponse("");
+    setAiResponse(""); //clears any previous AI response
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
     const result = await model.generateContent([
       "What is in this image?",
       imageInlineData,
     ]);
+    // generates content using AI model - two inputs to model, question "what is in this image?" and image data to analyze
     const response = await result.response;
     const text = response.text();
     setAiResponse(text);
@@ -30,8 +32,11 @@ const AiImage = () => {
     aiRun();
   };
 
+  // -------------------    Rendering image and file name in DOM      --------------//
+  // -------------------------------------------------------------------------------//
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    //event when user selects new image file
 
     // getting base64 from file to render in DOM
     getBase64(file as File)
@@ -56,6 +61,7 @@ const AiImage = () => {
       reader.onloadend = () => {
         if (reader.result) {
           resolve((reader.result as string).split(",")[1]);
+          // taking base64 data result as string
         } else {
           throw new Error("No result from FileReader");
         }
@@ -84,9 +90,12 @@ const AiImage = () => {
             type="file"
             onChange={(e) => handleImageChange(e)}
           />
-          <button 
-          className="py-2 w-[10rem] mt-4 mx-auto bg-blue-700/90 shadow-md text-white rounded-md hover:bg-blue-800/90 hover:scale-110 active:scale-105 transition-all"
-          onClick={() => handleClick()}>Ask Me</button>
+          <button
+            className="shadow-md py-2 w-[10rem] mt-4 mx-auto bg-blue-700/90 text-white rounded-md hover:bg-blue-800/90 hover:scale-110 active:scale-105 transition-all"
+            onClick={() => handleClick()}
+          >
+            Ask Me
+          </button>
         </div>
         <img
         className="p-4 w-10/12 mx-auto" 
@@ -94,10 +103,14 @@ const AiImage = () => {
 
         {loading == true && aiResponse == "" ? (
           <p className=" flex justify-center text-xl text-gray-800 drop-shadow-sm ">
-            <CgSpinner className="animate-spin text-2xl mr-1 mt-[0.2rem]"/> Loading ...</p>
+            <CgSpinner className="animate-spin text-2xl mr-1 mt-[0.2rem]" />{" "}
+            Loading ...
+          </p>
         ) : (
-          <div >
-            <p className="text-xl text-gray-800 drop-shadow-sm mb-6 mt-[0.45rem]">{aiResponse}</p>
+          <div>
+            <p className="text-xl text-gray-800 drop-shadow-sm mb-6 mt-[0.45rem]">
+              {aiResponse}
+            </p>
           </div>
         )}
       </div>
